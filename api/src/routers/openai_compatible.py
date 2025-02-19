@@ -17,6 +17,7 @@ from ..core.config import settings
 from ..services.audio import AudioService
 from ..services.tts_service import TTSService
 from ..structures import OpenAISpeechRequest
+from ..auth import api_key_auth
 
 
 # Load OpenAI mappings
@@ -38,7 +39,7 @@ _openai_mappings = load_openai_mappings()
 
 router = APIRouter(
     tags=["OpenAI Compatible TTS"],
-    responses={404: {"description": "Not found"}},
+    responses={404: {"description": "Not found"}},dependencies=[Depends(api_key_auth)],
 )
 
 # Global TTSService instance with lock

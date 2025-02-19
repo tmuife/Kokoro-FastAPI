@@ -1,15 +1,16 @@
 """Web player router with async file serving."""
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from fastapi.responses import Response
 from loguru import logger
 
 from ..core.config import settings
 from ..core.paths import get_content_type, get_web_file_path, read_bytes
+from ..auth import api_key_auth
 
 router = APIRouter(
     tags=["Web Player"],
-    responses={404: {"description": "Not found"}},
+    responses={404: {"description": "Not found"}},dependencies=[Depends(api_key_auth)]
 )
 
 

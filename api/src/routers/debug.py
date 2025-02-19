@@ -3,7 +3,8 @@ import time
 from datetime import datetime
 
 import psutil
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from ..auth import api_key_auth
 
 try:
     import GPUtil
@@ -12,7 +13,7 @@ try:
 except ImportError:
     GPU_AVAILABLE = False
 
-router = APIRouter(tags=["debug"])
+router = APIRouter(tags=["debug"],dependencies=[Depends(api_key_auth)])
 
 
 @router.get("/debug/threads")

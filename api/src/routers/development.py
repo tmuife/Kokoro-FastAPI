@@ -22,9 +22,9 @@ from ..structures.text_schemas import (
 import json
 import os
 from pathlib import Path
+from ..auth import api_key_auth
 
-
-router = APIRouter(tags=["text processing"])
+router = APIRouter(tags=["text processing"],dependencies=[Depends(api_key_auth)])
 
 
 async def get_tts_service() -> TTSService:

@@ -122,15 +122,15 @@ if settings.cors_enabled:
         allow_headers=["*"],
     )
 
-API_KEY_VALUE = "kokoro_key"
-@app.middleware("http")
-async def api_key_middleware(request: Request, call_next):
-    if request.url.path in ["/docs", "/redoc", "/openapi.json"]:  # 允许某些路径不需要 API Key
-        return await call_next(request)
-    api_key = request.headers.get("API-KEY")
-    if api_key != API_KEY_VALUE:
-        raise HTTPException(status_code=403, detail="Invalid API Key")
-    return await call_next(request)
+#API_KEY_VALUE = "kokoro_key"
+#@app.middleware("http")
+#async def api_key_middleware(request: Request, call_next):
+#    if request.url.path in ["/docs", "/redoc", "/openapi.json"]:  # 允许某些路径不需要 API Key
+#        return await call_next(request)
+#    api_key = request.headers.get("API-KEY")
+#    if api_key != API_KEY_VALUE:
+#        raise HTTPException(status_code=403, detail="Invalid API Key")
+#    return await call_next(request)
 
 
 # Include routers
